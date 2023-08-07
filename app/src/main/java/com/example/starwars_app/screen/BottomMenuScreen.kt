@@ -38,6 +38,7 @@ fun BottomNavigationBar(navController: NavHostController){
     NavigationBar(
         modifier = Modifier
             .border(width = 1.dp, color = Color.Black),
+        tonalElevation = 0.dp,
         containerColor = Color.Black,
         //contentColor = Color.Red
     ) {
@@ -49,7 +50,7 @@ fun BottomNavigationBar(navController: NavHostController){
             NavigationBarItem(
                 selected = (currentRoute == menuItem.route),
                 onClick = {
-                    //navController.navigate(menuItem.route)
+                    navController.navigate(menuItem.route)
                 },
                 icon = {
                     Icon(
@@ -68,6 +69,7 @@ fun BottomNavigationBar(navController: NavHostController){
                     selectedTextColor = Color.Yellow,
                     unselectedIconColor = Color.White,
                     unselectedTextColor = Color.White,
+                    indicatorColor = Color.Transparent
                 )
                 //alwaysShowLabel = false
             )
