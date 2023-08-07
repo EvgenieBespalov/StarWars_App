@@ -40,7 +40,7 @@ fun BottomNavigationBar(navController: NavHostController){
     NavigationBar(
         modifier = Modifier
             .border(width = 1.dp, color = Color.Black),
-        containerColor = Color.White,
+        containerColor = Color.Black,
         //contentColor = Color.Red
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -66,10 +66,10 @@ fun BottomNavigationBar(navController: NavHostController){
                 },
                 enabled = true,
                 colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = Color.Black,
-                    selectedTextColor = Color.Black,
-                    unselectedIconColor = Color.Red,
-                    unselectedTextColor = Color.Red,
+                    selectedIconColor = Color.Yellow,
+                    selectedTextColor = Color.Yellow,
+                    unselectedIconColor = Color.White,
+                    unselectedTextColor = Color.White,
                 )
                 //alwaysShowLabel = false
             )

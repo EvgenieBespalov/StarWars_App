@@ -21,10 +21,14 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.starwars_app.R
 
 @Composable
-fun ResourcesScreen(){
+fun ResourcesScreen(
+    navController: NavHostController
+){
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -108,5 +112,6 @@ fun ResourcesScreen(){
 @Preview
 @Composable
 fun ResourcesScreenPreview(){
-    ResourcesScreen()
+    val navController = rememberNavController()
+    ResourcesScreen(navController)
 }

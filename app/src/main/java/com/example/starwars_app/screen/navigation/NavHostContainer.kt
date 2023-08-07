@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.starwars_app.screen.ResourcesScreen
 
 @Composable
 fun NavHostContainer(
@@ -17,11 +18,11 @@ fun NavHostContainer(
     NavHost(
         navController = navController,
         startDestination = Routes.SearchScreenRoute.route,
-        modifier = Modifier.padding(paddingValues = padding),
+        //modifier = Modifier.padding(paddingValues = padding),
         builder = {
 
             composable(Routes.SearchScreenRoute.route) {
-                //ProductListScreen(navController = navController)
+                ResourcesScreen(navController = navController)
             }
 
             composable(Routes.FavouritesScreenRoute.route) {
