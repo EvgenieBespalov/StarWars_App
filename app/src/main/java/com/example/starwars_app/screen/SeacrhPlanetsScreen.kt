@@ -33,6 +33,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.starwars_app.R
+import com.example.starwars_app.screen.navigation.Routes
 
 @Composable
 fun SearchPlanetsScreen(navController: NavHostController){
@@ -83,13 +84,14 @@ fun SearchPlanetsScreen(navController: NavHostController){
                 textStyle = TextStyle(fontSize = 20.sp)
             )
 
-            ListOfPlanetLazyVerticalGrid()
+            ListOfPlanetLazyVerticalGrid(navController)
         }
     }
 }
 
 @Composable
 fun ListOfPlanetLazyVerticalGrid(
+    navController: NavHostController
 ){
     LazyVerticalGrid(
         modifier = Modifier
@@ -97,13 +99,15 @@ fun ListOfPlanetLazyVerticalGrid(
         columns = GridCells.Fixed(2)
     ) {
         items(100){
-            PlanetBox()
+            PlanetBox(navController)
         }
     }
 }
 
 @Composable
-fun PlanetBox(){
+fun PlanetBox(
+    navController: NavHostController
+){
     /*val image =
         rememberAsyncImagePainter(productItem.photo)*/
 
@@ -120,7 +124,7 @@ fun PlanetBox(){
                 shape = RoundedCornerShape(30.dp)
             )
             .clickable {
-                //navController.navigate(Routes.ProductCardScreenRoute.route + "/${productItem.productId}")
+                navController.navigate(Routes.PlanetInfoScreenRoute.route)
             },
         contentAlignment = Alignment.BottomCenter,
     ){
