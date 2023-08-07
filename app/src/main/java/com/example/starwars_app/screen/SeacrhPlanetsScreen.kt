@@ -30,11 +30,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.starwars_app.R
 
 @Composable
-fun SearchPlanetsScreen(){
+fun SearchPlanetsScreen(navController: NavHostController){
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -143,5 +144,6 @@ fun PlanetBox(){
 @Preview
 @Composable
 fun SearchPlanetsScreenPreview(){
-    SearchPlanetsScreen()
+    val navController = rememberNavController()
+    SearchPlanetsScreen(navController)
 }

@@ -2,9 +2,7 @@ package com.example.starwars_app.screen
 
 import androidx.compose.foundation.border
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -84,7 +82,7 @@ object ListOfBottomMenuItems {
         BottomMenuItem(
             label = "Search",
             icon = Icons.Outlined.Search,
-            route = Routes.SearchScreenRoute.route
+            route = Routes.ResourcesScreenRoute.route
         ),
         BottomMenuItem(
             label = "Favorites",

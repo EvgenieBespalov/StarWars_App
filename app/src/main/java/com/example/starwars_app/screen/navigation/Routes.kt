@@ -1,6 +1,7 @@
 package com.example.starwars_app.screen.navigation
 
 sealed class Routes(val route: String) {
-    object SearchScreenRoute : Routes("Search")
+    object ResourcesScreenRoute : Routes("Resources")
+    object SearchPlanetsScreenRoute : Routes("SearchPlanets")
     object FavouritesScreenRoute : Routes("Favourites")
 }

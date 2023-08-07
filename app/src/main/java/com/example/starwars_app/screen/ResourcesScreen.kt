@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.starwars_app.R
+import com.example.starwars_app.screen.navigation.Routes
 
 @Composable
 fun ResourcesScreen(
@@ -49,7 +50,9 @@ fun ResourcesScreen(
                         color = Color.White,
                         shape = RoundedCornerShape(30.dp)
                     ),
-                onClick = {},
+                onClick = {
+                    navController.navigate(Routes.SearchPlanetsScreenRoute.route)
+                },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Black,
                     contentColor = Color.White,
