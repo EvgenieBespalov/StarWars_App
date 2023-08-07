@@ -60,7 +60,7 @@ fun ResourcesScreen(
                 shape = RoundedCornerShape(30.dp),
             ){
                 Text(
-                    text = "Планеты",
+                    text = "Planets",
                     fontSize = 20.sp
                 )
             }
@@ -82,7 +82,7 @@ fun ResourcesScreen(
                 shape = RoundedCornerShape(30.dp),
             ){
                 Text(
-                    text = "Персонажи",
+                    text = "Characters",
                     fontSize = 20.sp
                 )
             }
@@ -104,7 +104,7 @@ fun ResourcesScreen(
                 shape = RoundedCornerShape(30.dp),
             ){
                 Text(
-                    text = "Звездолеты",
+                    text = "Starships",
                     fontSize = 20.sp
                 )
             }

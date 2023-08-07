@@ -64,7 +64,7 @@ fun SearchPlanetsScreen(navController: NavHostController){
                 isError = userPasswordCorrectTextField,
                 placeholder = {
                     Text(
-                        "Введите название планеты",
+                        "Enter the name of the planet",
                         fontSize = 20.sp
                     ) },
                 colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -129,7 +129,7 @@ fun PlanetBox(){
                 .size(200.dp),
             painter = painterResource(R.drawable.background_character_image),
             contentScale = ContentScale.Crop,
-            contentDescription = "Иконка планеты"
+            contentDescription = "Icon planet"
         )
         Text(
             modifier = Modifier
