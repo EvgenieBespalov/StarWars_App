@@ -31,6 +31,10 @@ fun NavHostContainer(
                 SearchCharactersScreen(navController = navController)
             }
 
+            composable(Routes.SearchStarShipsScreenRoute.route) {
+                SearchStarShipsScreen(navController = navController)
+            }
+
             composable(Routes.InfoPlanetScreenRoute.route) {
                 InfoPlanetScreen()
             }
