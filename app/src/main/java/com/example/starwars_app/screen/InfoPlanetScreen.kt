@@ -4,8 +4,14 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Star
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
@@ -62,6 +68,27 @@ fun InfoPlanetScreen(){
                 fontSize = 30.sp,
                 color = Color.Yellow
             )
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.BottomEnd
+            ) {
+                IconButton(
+                    modifier = Modifier
+                        .size(75.dp),
+                    colors = IconButtonDefaults.iconButtonColors(
+                        containerColor = Color.Transparent,
+                        contentColor = Color.Yellow,
+                    ),
+                    onClick = { /*TODO*/ }
+                ) {
+                    Icon(
+                        modifier = Modifier
+                            .size(75.dp),
+                        imageVector = Icons.Outlined.Star,
+                        contentDescription = "Buttom add in favorites"
+                    )
+                }
+            }
         }
     }
 }
