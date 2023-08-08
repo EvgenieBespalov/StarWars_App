@@ -5,10 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.starwars_app.screen.InfoPlanetScreen
-import com.example.starwars_app.screen.ResourcesScreen
-import com.example.starwars_app.screen.SearchCharactersScreen
-import com.example.starwars_app.screen.SearchPlanetsScreen
+import com.example.starwars_app.screen.*
 
 @Composable
 fun NavHostContainer(
@@ -34,8 +31,12 @@ fun NavHostContainer(
                 SearchCharactersScreen(navController = navController)
             }
 
-            composable(Routes.PlanetInfoScreenRoute.route) {
+            composable(Routes.InfoPlanetScreenRoute.route) {
                 InfoPlanetScreen()
+            }
+
+            composable(Routes.InfoCharacterScreenRoute.route) {
+                InfoCharacterScreen()
             }
         }
     )

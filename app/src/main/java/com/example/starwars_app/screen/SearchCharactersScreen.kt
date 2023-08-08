@@ -117,7 +117,7 @@ fun CharacterBox(
                 shape = RoundedCornerShape(30.dp)
             )
             .clickable {
-                navController.navigate(Routes.PlanetInfoScreenRoute.route)
+                navController.navigate(Routes.InfoCharacterScreenRoute.route)
             },
         contentAlignment = Alignment.BottomCenter,
     ){

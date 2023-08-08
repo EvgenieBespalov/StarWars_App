@@ -49,7 +49,7 @@ fun InfoCharacterScreen(){
                     ),
                 painter = painterResource(R.drawable.background_character_image),
                 contentScale = ContentScale.Crop,
-                contentDescription = "Icon planet"
+                contentDescription = "Icon character"
             )
             Text(
                 text = "Gender",
