@@ -15,7 +15,7 @@ class PlanetRepositoryImpl(
     private val converter: ConverterPlanet
 ) : PlanetRepository {
 
-    override suspend fun searchPlanet(name: String, page: String): Flow<PagingData<PlanetEntity>> =
+    override suspend fun searchPlanet(name: String): Flow<PagingData<PlanetEntity>> =
         Pager(PagingConfig(10)){
             PlanetPagingSource(planetApi, converter, name)
         }.flow
