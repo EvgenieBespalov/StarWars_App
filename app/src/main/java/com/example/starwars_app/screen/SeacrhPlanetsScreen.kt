@@ -28,10 +28,15 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.starwars_app.R
+import com.example.starwars_app.presentation.SearchPlanetsScreenViewModel
 import com.example.starwars_app.screen.navigation.Routes
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun SearchPlanetsScreen(navController: NavHostController){
+fun SearchPlanetsScreen(
+    navController: NavHostController,
+    viewModel: SearchPlanetsScreenViewModel = koinViewModel()
+){
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -45,7 +50,6 @@ fun SearchPlanetsScreen(navController: NavHostController){
             .fillMaxSize()
         ){
             var userPasswordTextField by remember { mutableStateOf("") }
-            var userPasswordCorrectTextField by remember { mutableStateOf(false) }
 
             OutlinedTextField(
                 modifier = Modifier
@@ -55,9 +59,8 @@ fun SearchPlanetsScreen(navController: NavHostController){
                 leadingIcon = { Icon(Icons.Outlined.Search, contentDescription = null) },
                 value = userPasswordTextField,
                 onValueChange = {
-
+                    userPasswordTextField = it
                 },
-                isError = userPasswordCorrectTextField,
                 placeholder = {
                     Text(
                         "Enter the name of the planet",
