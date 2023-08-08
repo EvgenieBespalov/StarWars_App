@@ -117,7 +117,7 @@ fun StarShipBox(
                 shape = RoundedCornerShape(30.dp)
             )
             .clickable {
-                navController.navigate(Routes.InfoPlanetScreenRoute.route)
+                navController.navigate(Routes.InfoStarShipScreenRoute.route)
             },
         contentAlignment = Alignment.BottomCenter,
     ){

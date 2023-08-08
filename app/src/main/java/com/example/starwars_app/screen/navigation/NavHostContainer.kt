@@ -42,6 +42,10 @@ fun NavHostContainer(
             composable(Routes.InfoCharacterScreenRoute.route) {
                 InfoCharacterScreen()
             }
+
+            composable(Routes.InfoStarShipScreenRoute.route) {
+                InfoStarShipScreen()
+            }
         }
     )
 }
