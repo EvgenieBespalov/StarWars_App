@@ -74,7 +74,9 @@ fun ResourcesScreen(
                         color = Color.White,
                         shape = RoundedCornerShape(30.dp)
                     ),
-                onClick = {},
+                onClick = {
+                    navController.navigate(Routes.SearchCharactersScreenRoute.route)
+                },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Transparent,
                     contentColor = Color.White,
