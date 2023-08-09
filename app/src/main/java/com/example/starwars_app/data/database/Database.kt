@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.example.starwars_app.data.dao.DatabaseDAO
 import com.example.starwars_app.data.model.DatabaseModel
 
-@Database(entities = [DatabaseModel::class], version = 1)
+@Database(entities = [DatabaseModel::class], version = 2)
 abstract class Database : RoomDatabase() {
     abstract fun databaseDAO() : DatabaseDAO
 }
