@@ -5,6 +5,7 @@ import com.example.starwars_app.data.converter.ConverterPlanet
 import com.example.starwars_app.domain.paging_source.PlanetPagingSource
 import com.example.starwars_app.data.repository.PlanetRepositoryImpl
 import com.example.starwars_app.domain.repository.PlanetRepository
+import com.example.starwars_app.domain.usecase.GetPlanetByIdUseCase
 import com.example.starwars_app.domain.usecase.SearchPlanetsUseCase
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -24,4 +25,5 @@ fun provideDomainModule(): Module =
         }
 
         factory { SearchPlanetsUseCase(repository = get()) }
+        factory { GetPlanetByIdUseCase(repository = get()) }
     }

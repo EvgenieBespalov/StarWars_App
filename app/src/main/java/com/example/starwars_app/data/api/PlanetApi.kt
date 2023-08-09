@@ -12,6 +12,6 @@ interface PlanetApi {
     @GET("/api/planets/")
     suspend fun searchPlanet(@Query("search") name: String, @Query("page") page: String): Response<PlanetsListApiModel>
 
-    @GET("/api/planets/{id}")
+    @GET("/api/planets/{id}/")
     suspend fun getPlanetById(@Path("id") id: String): PlanetApiModel
 }

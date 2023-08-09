@@ -40,8 +40,8 @@ fun NavHostContainer(
                 SearchStarShipsScreen(navController = navController)
             }
 
-            composable(Routes.InfoPlanetScreenRoute.route) {
-                InfoPlanetScreen()
+            composable(Routes.InfoPlanetScreenRoute.route + "/{planetId}") {
+                InfoPlanetScreen(planetId = it.arguments?.getString("planetId"))
             }
 
             composable(Routes.InfoCharacterScreenRoute.route) {

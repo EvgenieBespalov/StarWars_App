@@ -138,7 +138,7 @@ fun PlanetBox(
                 shape = RoundedCornerShape(30.dp)
             )
             .clickable {
-                navController.navigate(Routes.InfoPlanetScreenRoute.route)
+                navController.navigate(Routes.InfoPlanetScreenRoute.route + "/${planet.id}")
             },
         contentAlignment = Alignment.BottomCenter,
     ){
