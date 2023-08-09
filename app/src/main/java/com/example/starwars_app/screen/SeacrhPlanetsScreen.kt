@@ -34,6 +34,8 @@ import org.koin.androidx.compose.koinViewModel
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import coil.compose.AsyncImage
+import coil.compose.rememberAsyncImagePainter
 import com.example.starwars_app.domain.entity.PlanetEntity
 
 @Composable
@@ -123,9 +125,6 @@ fun PlanetBox(
     navController: NavHostController,
     planet: PlanetEntity
 ){
-    /*val image =
-        rememberAsyncImagePainter(productItem.photo)*/
-
     Box(
         modifier = Modifier
             .padding(5.dp)
@@ -143,10 +142,11 @@ fun PlanetBox(
             },
         contentAlignment = Alignment.BottomCenter,
     ){
-        Image(
+        AsyncImage(
             modifier = Modifier
                 .size(200.dp),
-            painter = painterResource(R.drawable.background_character_image),
+            model = planet.image,
+            error = painterResource(R.drawable.placeholder_image),
             contentScale = ContentScale.Crop,
             contentDescription = "Icon planet"
         )

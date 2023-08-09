@@ -8,6 +8,7 @@ class ConverterPlanet {
         PlanetEntity(
             name = from.name,
             diameter = from.diameter,
-            population = from.population
-        )
+            population = from.population,
+            image = "https://starwars-visualguide.com/assets/img/planets/${from.url.replace("[^0-9]".toRegex(), "")}.jpg"
+    )
 }
