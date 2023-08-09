@@ -1,5 +1,6 @@
 package com.example.starwars_app.di
 
+import com.example.starwars_app.presentation.InfoPeopleScreenViewModel
 import com.example.starwars_app.presentation.InfoPlanetScreenViewModel
 import com.example.starwars_app.presentation.SearchPeoplesScreenViewModel
 import com.example.starwars_app.presentation.SearchPlanetsScreenViewModel
@@ -24,6 +25,12 @@ fun providePresentationModule(): Module =
         viewModel {
             SearchPeoplesScreenViewModel(
                 searchPeoplesUseCase = get()
+            )
+        }
+
+        viewModel {
+            InfoPeopleScreenViewModel(
+                getPeopleByIdUseCase = get()
             )
         }
     }

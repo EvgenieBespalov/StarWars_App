@@ -9,6 +9,7 @@ import com.example.starwars_app.domain.paging_source.PlanetPagingSource
 import com.example.starwars_app.data.repository.PlanetRepositoryImpl
 import com.example.starwars_app.domain.repository.PeopleRepository
 import com.example.starwars_app.domain.repository.PlanetRepository
+import com.example.starwars_app.domain.usecase.GetPeopleByIdUseCase
 import com.example.starwars_app.domain.usecase.GetPlanetByIdUseCase
 import com.example.starwars_app.domain.usecase.SearchPeoplesUseCase
 import com.example.starwars_app.domain.usecase.SearchPlanetsUseCase
@@ -43,5 +44,5 @@ fun provideDomainModule(): Module =
             )
         }
         factory { SearchPeoplesUseCase(repository = get()) }
-        //factory { GetPeopleByIdUseCase(repository = get()) }
+        factory { GetPeopleByIdUseCase(repository = get()) }
     }

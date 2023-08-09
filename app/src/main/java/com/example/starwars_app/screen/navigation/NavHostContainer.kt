@@ -1,7 +1,5 @@
 package com.example.starwars_app.screen.navigation
 
-import android.service.controls.ControlsProviderService
-import android.util.Log
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -10,7 +8,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.starwars_app.screen.*
-import retrofit2.HttpException
 
 @Composable
 fun NavHostContainer(
@@ -33,7 +30,7 @@ fun NavHostContainer(
             }
 
             composable(Routes.SearchCharactersScreenRoute.route) {
-                SearchCharactersScreen(navController = navController)
+                SearchPeoplesScreen(navController = navController)
             }
 
             composable(Routes.SearchStarShipsScreenRoute.route) {
@@ -44,8 +41,8 @@ fun NavHostContainer(
                 InfoPlanetScreen(planetId = it.arguments?.getString("planetId"))
             }
 
-            composable(Routes.InfoCharacterScreenRoute.route) {
-                InfoCharacterScreen()
+            composable(Routes.InfoPeopleScreenRoute.route + "/{peopleId}") {
+                InfoPeopleScreen(peopleId = it.arguments?.getString("peopleId"))
             }
 
             composable(Routes.InfoStarShipScreenRoute.route) {

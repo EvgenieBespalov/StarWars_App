@@ -1,6 +1,5 @@
 package com.example.starwars_app.screen
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -31,7 +30,6 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import com.example.starwars_app.R
 import com.example.starwars_app.domain.entity.PeopleEntity
-import com.example.starwars_app.domain.entity.PlanetEntity
 import com.example.starwars_app.presentation.SearchPeoplesScreenUiState
 import com.example.starwars_app.presentation.SearchPeoplesScreenViewModel
 import com.example.starwars_app.presentation.SearchPlanetsScreenUiState
@@ -39,7 +37,7 @@ import com.example.starwars_app.screen.navigation.Routes
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun SearchCharactersScreen(
+fun SearchPeoplesScreen(
     navController: NavHostController,
     viewModel: SearchPeoplesScreenViewModel = koinViewModel()
 ){
@@ -73,7 +71,7 @@ fun SearchCharactersScreen(
                 },
                 placeholder = {
                     Text(
-                        "Enter the name of the character",
+                        "Enter the name of the people",
                         fontSize = 20.sp
                     ) },
                 colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -138,7 +136,7 @@ fun CharacterBox(
                 shape = RoundedCornerShape(30.dp)
             )
             .clickable {
-                navController.navigate(Routes.InfoCharacterScreenRoute.route)
+                navController.navigate(Routes.InfoPeopleScreenRoute.route + "/${people.id}")
             },
         contentAlignment = Alignment.BottomCenter,
     ){
