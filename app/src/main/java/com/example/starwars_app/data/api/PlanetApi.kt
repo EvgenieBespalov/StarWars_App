@@ -8,7 +8,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface PlanetApi {
-   // @GET("/api/planets/?search={name}&page={page}")
     @GET("/api/planets/")
     suspend fun searchPlanet(@Query("search") name: String, @Query("page") page: String): Response<PlanetsListApiModel>
 

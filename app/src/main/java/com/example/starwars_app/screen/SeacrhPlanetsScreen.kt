@@ -68,7 +68,7 @@ fun SearchPlanetsScreen(
                 value = namePlanets,
                 onValueChange = {
                     namePlanets = it
-                    if (namePlanets.length > 0)
+                    if (namePlanets.length > 1)
                         viewModel.searchPlanets(namePlanets)
                 },
                 placeholder = {

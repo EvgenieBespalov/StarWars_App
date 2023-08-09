@@ -14,6 +14,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
@@ -25,11 +26,25 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import coil.compose.AsyncImage
 import com.example.starwars_app.R
+import com.example.starwars_app.domain.entity.PeopleEntity
+import com.example.starwars_app.domain.entity.PlanetEntity
+import com.example.starwars_app.presentation.SearchPeoplesScreenUiState
+import com.example.starwars_app.presentation.SearchPeoplesScreenViewModel
+import com.example.starwars_app.presentation.SearchPlanetsScreenUiState
 import com.example.starwars_app.screen.navigation.Routes
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun SearchCharactersScreen(navController: NavHostController){
+fun SearchCharactersScreen(
+    navController: NavHostController,
+    viewModel: SearchPeoplesScreenViewModel = koinViewModel()
+){
+    val state by viewModel.state.observeAsState(SearchPeoplesScreenUiState.Initial)
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -42,8 +57,7 @@ fun SearchCharactersScreen(navController: NavHostController){
         Column(modifier = Modifier
             .fillMaxSize()
         ){
-            var userPasswordTextField by remember { mutableStateOf("") }
-            var userPasswordCorrectTextField by remember { mutableStateOf(false) }
+            var namePeoples by remember { mutableStateOf("") }
 
             OutlinedTextField(
                 modifier = Modifier
@@ -51,11 +65,12 @@ fun SearchCharactersScreen(navController: NavHostController){
                     .height(55.dp)
                     .fillMaxWidth(),
                 leadingIcon = { Icon(Icons.Outlined.Search, contentDescription = null) },
-                value = userPasswordTextField,
+                value = namePeoples,
                 onValueChange = {
-
+                    namePeoples = it
+                    if (namePeoples.length > 1)
+                        viewModel.searchPeoples(namePeoples)
                 },
-                isError = userPasswordCorrectTextField,
                 placeholder = {
                     Text(
                         "Enter the name of the character",
@@ -77,33 +92,39 @@ fun SearchCharactersScreen(navController: NavHostController){
                 textStyle = TextStyle(fontSize = 20.sp)
             )
 
-            ListOfCharactersLazyVerticalGrid(navController)
+            when(state){
+                SearchPeoplesScreenUiState.Initial    -> Unit
+                SearchPeoplesScreenUiState.Loading    -> ScreenLoadind()
+                is SearchPeoplesScreenUiState.Content -> {
+                    ListOfCharactersLazyVerticalGrid(navController = navController, peoples = (state as SearchPeoplesScreenUiState.Content).peoples.collectAsLazyPagingItems())
+                }
+                is SearchPeoplesScreenUiState.Error   -> ScreenError(errorText = (state as SearchPlanetsScreenUiState.Error).message.orEmpty())
+            }
         }
     }
 }
 
 @Composable
 fun ListOfCharactersLazyVerticalGrid(
-    navController: NavHostController
+    navController: NavHostController,
+    peoples: LazyPagingItems<PeopleEntity>
 ){
     LazyVerticalGrid(
         modifier = Modifier
             .fillMaxSize(),
         columns = GridCells.Fixed(2)
     ) {
-        items(100){
-            CharacterBox(navController)
+        items(count = peoples.itemCount) { index ->
+            peoples[index]?.let { CharacterBox(navController, it) }
         }
     }
 }
 
 @Composable
 fun CharacterBox(
-    navController: NavHostController
+    navController: NavHostController,
+    people: PeopleEntity
 ){
-    /*val image =
-        rememberAsyncImagePainter(productItem.photo)*/
-
     Box(
         modifier = Modifier
             .padding(5.dp)
@@ -121,17 +142,18 @@ fun CharacterBox(
             },
         contentAlignment = Alignment.BottomCenter,
     ){
-        Image(
+        AsyncImage(
             modifier = Modifier
                 .size(200.dp),
-            painter = painterResource(R.drawable.background_character_image),
+            model = people.image,
+            error = painterResource(R.drawable.placeholder_image),
             contentScale = ContentScale.Crop,
-            contentDescription = "Icon character"
+            contentDescription = "Icon planet"
         )
         Text(
             modifier = Modifier
                 .padding(5.dp),
-            text = "Name character",
+            text = people.name,
             color = Color.Yellow,
             fontSize = 20.sp
         )

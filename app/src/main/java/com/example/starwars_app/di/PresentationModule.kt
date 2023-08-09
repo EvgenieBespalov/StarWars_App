@@ -1,6 +1,7 @@
 package com.example.starwars_app.di
 
 import com.example.starwars_app.presentation.InfoPlanetScreenViewModel
+import com.example.starwars_app.presentation.SearchPeoplesScreenViewModel
 import com.example.starwars_app.presentation.SearchPlanetsScreenViewModel
 import com.example.starwars_app.screen.InfoPlanetScreen
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -14,10 +15,15 @@ fun providePresentationModule(): Module =
                 searchPlanetsUseCase = get()
             )
         }
-
         viewModel {
             InfoPlanetScreenViewModel(
                 getPlanetByIdUseCase = get()
+            )
+        }
+
+        viewModel {
+            SearchPeoplesScreenViewModel(
+                searchPeoplesUseCase = get()
             )
         }
     }

@@ -2,6 +2,7 @@ package com.example.starwars_app.di
 
 import android.service.controls.ControlsProviderService
 import android.util.Log
+import com.example.starwars_app.data.api.PeopleApi
 import com.example.starwars_app.data.api.PlanetApi
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -45,6 +46,8 @@ private fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit =
 private fun providePlanetApi(retrofit: Retrofit): PlanetApi =
     retrofit.create()
 
+private fun providePeopleApi(retrofit: Retrofit): PeopleApi =
+    retrofit.create()
 
 class ReceivedCookiesInterceptor() : Interceptor {
     @Throws(IOException::class)
@@ -66,4 +69,5 @@ fun provideNetworkModule(): Module =
         single { provideGson() }
         single { provideRetrofit(okHttpClient = get(), gson = get()) }
         single { providePlanetApi(retrofit = get()) }
+        single { providePeopleApi(retrofit = get()) }
     }
