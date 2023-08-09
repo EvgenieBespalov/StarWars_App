@@ -65,11 +65,35 @@ fun InfoPlanetColumn(planet: PlanetEntity){
         modifier = Modifier.padding(10.dp),
         verticalArrangement = Arrangement.Center,
     ){
-        Text(
-            text = planet.name,
-            fontSize = 30.sp,
-            color = Color.Yellow
-        )
+        Row(){
+            Text(
+                text = planet.name,
+                fontSize = 30.sp,
+                color = Color.Yellow
+            )
+
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.CenterEnd
+            ) {
+                IconButton(
+                    modifier = Modifier
+                        .size(40.dp),
+                    colors = IconButtonDefaults.iconButtonColors(
+                        containerColor = Color.Transparent,
+                        contentColor = Color.Yellow,
+                    ),
+                    onClick = { /*TODO*/ }
+                ) {
+                    Icon(
+                        modifier = Modifier
+                            .size(40.dp),
+                        imageVector = Icons.Outlined.Star,
+                        contentDescription = "Buttom add in favorites"
+                    )
+                }
+            }
+        }
         AsyncImage(
             modifier = Modifier
                 .size(400.dp)
@@ -97,26 +121,5 @@ fun InfoPlanetColumn(planet: PlanetEntity){
             fontSize = 30.sp,
             color = Color.Yellow
         )
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.BottomEnd
-        ) {
-            IconButton(
-                modifier = Modifier
-                    .size(75.dp),
-                colors = IconButtonDefaults.iconButtonColors(
-                    containerColor = Color.Transparent,
-                    contentColor = Color.Yellow,
-                ),
-                onClick = { /*TODO*/ }
-            ) {
-                Icon(
-                    modifier = Modifier
-                        .size(75.dp),
-                    imageVector = Icons.Outlined.Star,
-                    contentDescription = "Buttom add in favorites"
-                )
-            }
-        }
     }
 }

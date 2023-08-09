@@ -6,10 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Star
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonDefaults
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -20,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -27,6 +25,7 @@ import com.example.starwars_app.R
 import com.example.starwars_app.domain.entity.PeopleEntity
 import com.example.starwars_app.presentation.InfoPeopleScreenUiState
 import com.example.starwars_app.presentation.InfoPeopleScreenViewModel
+import com.example.starwars_app.screen.navigation.Routes
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -61,11 +60,37 @@ fun InfoPeopleColumn(people: PeopleEntity){
         modifier = Modifier.padding(10.dp),
         verticalArrangement = Arrangement.Center,
     ){
-        Text(
-            text = people.name,
-            fontSize = 30.sp,
-            color = Color.Yellow
-        )
+        Row(){
+            Text(
+                text = people.name,
+                fontSize = 30.sp,
+                color = Color.Yellow
+            )
+
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.CenterEnd
+            ) {
+                IconButton(
+                    modifier = Modifier
+                        .size(40.dp),
+                    colors = IconButtonDefaults.iconButtonColors(
+                        containerColor = Color.Transparent,
+                        contentColor = Color.Yellow,
+                    ),
+                    onClick = { /*TODO*/ }
+                ) {
+                    Icon(
+                        modifier = Modifier
+                            .size(40.dp),
+                        imageVector = Icons.Outlined.Star,
+                        contentDescription = "Buttom add in favorites"
+                    )
+                }
+            }
+        }
+
+
         AsyncImage(
             modifier = Modifier
                 .size(400.dp)
@@ -93,26 +118,5 @@ fun InfoPeopleColumn(people: PeopleEntity){
             fontSize = 30.sp,
             color = Color.Yellow
         )
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.BottomEnd
-        ) {
-            IconButton(
-                modifier = Modifier
-                    .size(75.dp),
-                colors = IconButtonDefaults.iconButtonColors(
-                    containerColor = Color.Transparent,
-                    contentColor = Color.Yellow,
-                ),
-                onClick = { /*TODO*/ }
-            ) {
-                Icon(
-                    modifier = Modifier
-                        .size(75.dp),
-                    imageVector = Icons.Outlined.Star,
-                    contentDescription = "Buttom add in favorites"
-                )
-            }
-        }
     }
 }
