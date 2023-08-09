@@ -35,7 +35,7 @@ fun ResourcesScreen(
             .fillMaxSize()
             .paint(
                 painter = painterResource(R.drawable.background_image),
-                contentScale = ContentScale.FillHeight
+                contentScale = ContentScale.None
             ),
         contentAlignment = Alignment.Center
     ){
