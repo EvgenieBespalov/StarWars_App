@@ -1,9 +1,6 @@
 package com.example.starwars_app.di
 
-import com.example.starwars_app.presentation.InfoPeopleScreenViewModel
-import com.example.starwars_app.presentation.InfoPlanetScreenViewModel
-import com.example.starwars_app.presentation.SearchPeoplesScreenViewModel
-import com.example.starwars_app.presentation.SearchPlanetsScreenViewModel
+import com.example.starwars_app.presentation.*
 import com.example.starwars_app.screen.InfoPlanetScreen
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
@@ -31,6 +28,12 @@ fun providePresentationModule(): Module =
         viewModel {
             InfoPeopleScreenViewModel(
                 getPeopleByIdUseCase = get()
+            )
+        }
+
+        viewModel {
+            SearchStarshipsScreenViewModel(
+                searchStarshipsUseCase = get()
             )
         }
     }

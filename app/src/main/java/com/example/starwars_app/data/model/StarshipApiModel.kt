@@ -2,7 +2,7 @@ package com.example.starwars_app.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class StarShipApiModel(
+data class StarshipApiModel(
     @SerializedName("name")
     val name: String,
     @SerializedName("model")

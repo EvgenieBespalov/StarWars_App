@@ -14,6 +14,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
@@ -25,11 +26,22 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import coil.compose.AsyncImage
 import com.example.starwars_app.R
+import com.example.starwars_app.domain.entity.StarshipEntity
+import com.example.starwars_app.presentation.*
 import com.example.starwars_app.screen.navigation.Routes
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun SearchStarShipsScreen(navController: NavHostController){
+fun SearchStarShipsScreen(
+    navController: NavHostController,
+    viewModel: SearchStarshipsScreenViewModel = koinViewModel()
+){
+    val state by viewModel.state.observeAsState(SearchStarshipsScreenUiState.Initial)
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -42,8 +54,7 @@ fun SearchStarShipsScreen(navController: NavHostController){
         Column(modifier = Modifier
             .fillMaxSize()
         ){
-            var userPasswordTextField by remember { mutableStateOf("") }
-            var userPasswordCorrectTextField by remember { mutableStateOf(false) }
+            var nameStarships by remember { mutableStateOf("") }
 
             OutlinedTextField(
                 modifier = Modifier
@@ -51,11 +62,12 @@ fun SearchStarShipsScreen(navController: NavHostController){
                     .height(55.dp)
                     .fillMaxWidth(),
                 leadingIcon = { Icon(Icons.Outlined.Search, contentDescription = null) },
-                value = userPasswordTextField,
+                value = nameStarships,
                 onValueChange = {
-
+                    nameStarships = it
+                    if (nameStarships.length > 1)
+                        viewModel.searchStarships(nameStarships)
                 },
-                isError = userPasswordCorrectTextField,
                 placeholder = {
                     Text(
                         "Enter the name of the starship",
@@ -77,33 +89,39 @@ fun SearchStarShipsScreen(navController: NavHostController){
                 textStyle = TextStyle(fontSize = 20.sp)
             )
 
-            ListOfStarShipLazyVerticalGrid(navController)
+            when(state){
+                SearchStarshipsScreenUiState.Initial    -> Unit
+                SearchStarshipsScreenUiState.Loading    -> ScreenLoadind()
+                is SearchStarshipsScreenUiState.Content -> {
+                    ListOfStarshipLazyVerticalGrid(navController = navController, starships = (state as SearchStarshipsScreenUiState.Content).starships.collectAsLazyPagingItems())
+                }
+                is SearchStarshipsScreenUiState.Error   -> ScreenError(errorText = (state as SearchStarshipsScreenUiState.Error).message.orEmpty())
+            }
         }
     }
 }
 
 @Composable
-fun ListOfStarShipLazyVerticalGrid(
-    navController: NavHostController
+fun ListOfStarshipLazyVerticalGrid(
+    navController: NavHostController,
+    starships: LazyPagingItems<StarshipEntity>
 ){
     LazyVerticalGrid(
         modifier = Modifier
             .fillMaxSize(),
         columns = GridCells.Fixed(2)
     ) {
-        items(100){
-            StarShipBox(navController)
+        items(count = starships.itemCount) { index ->
+            starships[index]?.let { StarshipBox(navController, it) }
         }
     }
 }
 
 @Composable
-fun StarShipBox(
-    navController: NavHostController
+fun StarshipBox(
+    navController: NavHostController,
+    starship: StarshipEntity
 ){
-    /*val image =
-        rememberAsyncImagePainter(productItem.photo)*/
-
     Box(
         modifier = Modifier
             .padding(5.dp)
@@ -121,17 +139,18 @@ fun StarShipBox(
             },
         contentAlignment = Alignment.BottomCenter,
     ){
-        Image(
+        AsyncImage(
             modifier = Modifier
                 .size(200.dp),
-            painter = painterResource(R.drawable.background_character_image),
+            model = starship.image,
+            error = painterResource(R.drawable.placeholder_image),
             contentScale = ContentScale.Crop,
             contentDescription = "Icon starship"
         )
         Text(
             modifier = Modifier
                 .padding(5.dp),
-            text = "Name starship",
+            text = starship.name,
             color = Color.Yellow,
             fontSize = 20.sp
         )

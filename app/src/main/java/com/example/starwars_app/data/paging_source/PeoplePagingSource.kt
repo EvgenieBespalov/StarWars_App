@@ -1,4 +1,4 @@
-package com.example.starwars_app.domain.paging_source
+package com.example.starwars_app.data.paging_source
 
 import android.service.controls.ControlsProviderService
 import android.util.Log

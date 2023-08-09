@@ -5,7 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.starwars_app.data.api.PlanetApi
 import com.example.starwars_app.data.converter.ConverterPlanet
-import com.example.starwars_app.domain.paging_source.PlanetPagingSource
+import com.example.starwars_app.data.paging_source.PlanetPagingSource
 import com.example.starwars_app.domain.entity.PlanetEntity
 import com.example.starwars_app.domain.repository.PlanetRepository
 import kotlinx.coroutines.flow.Flow

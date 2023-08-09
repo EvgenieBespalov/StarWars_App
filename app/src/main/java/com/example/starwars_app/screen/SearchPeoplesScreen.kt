@@ -94,7 +94,7 @@ fun SearchPeoplesScreen(
                 SearchPeoplesScreenUiState.Initial    -> Unit
                 SearchPeoplesScreenUiState.Loading    -> ScreenLoadind()
                 is SearchPeoplesScreenUiState.Content -> {
-                    ListOfCharactersLazyVerticalGrid(navController = navController, peoples = (state as SearchPeoplesScreenUiState.Content).peoples.collectAsLazyPagingItems())
+                    ListOfPeoplesLazyVerticalGrid(navController = navController, peoples = (state as SearchPeoplesScreenUiState.Content).peoples.collectAsLazyPagingItems())
                 }
                 is SearchPeoplesScreenUiState.Error   -> ScreenError(errorText = (state as SearchPlanetsScreenUiState.Error).message.orEmpty())
             }
@@ -103,7 +103,7 @@ fun SearchPeoplesScreen(
 }
 
 @Composable
-fun ListOfCharactersLazyVerticalGrid(
+fun ListOfPeoplesLazyVerticalGrid(
     navController: NavHostController,
     peoples: LazyPagingItems<PeopleEntity>
 ){
@@ -113,13 +113,13 @@ fun ListOfCharactersLazyVerticalGrid(
         columns = GridCells.Fixed(2)
     ) {
         items(count = peoples.itemCount) { index ->
-            peoples[index]?.let { CharacterBox(navController, it) }
+            peoples[index]?.let { PeopleBox(navController, it) }
         }
     }
 }
 
 @Composable
-fun CharacterBox(
+fun PeopleBox(
     navController: NavHostController,
     people: PeopleEntity
 ){

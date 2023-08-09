@@ -10,5 +10,5 @@ data class StarshipsListApiModel(
     @SerializedName("previous")
     val previous: String?,
     @SerializedName("results")
-    val results: List<StarShipApiModel>,
+    val results: List<StarshipApiModel>,
 )
