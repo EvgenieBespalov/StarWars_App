@@ -83,7 +83,7 @@ fun StarshipInfoColumn(
                 ),
             model = starship.image,
             error = painterResource(R.drawable.placeholder_image),
-            contentScale = ContentScale.Crop,
+            contentScale = ContentScale.FillWidth,
             contentDescription = "Icon planet"
         )
         Text(
