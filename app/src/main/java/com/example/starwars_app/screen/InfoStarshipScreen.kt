@@ -60,6 +60,7 @@ fun InfoStarshipScreen(
 
 @Composable
 fun StarshipInfoColumn(
+    viewModel: InfoStarshipScreenViewModel = koinViewModel(),
     starship: StarshipEntity
 ){
     Column(
@@ -86,7 +87,9 @@ fun StarshipInfoColumn(
                         containerColor = Color.Transparent,
                         contentColor = Color.Yellow,
                     ),
-                    onClick = { /*TODO*/ }
+                    onClick = {
+                        viewModel.saveStarship(starship)
+                    }
                 ) {
                     Icon(
                         modifier = Modifier

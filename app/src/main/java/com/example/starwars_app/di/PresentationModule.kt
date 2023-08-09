@@ -40,7 +40,8 @@ fun providePresentationModule(): Module =
 
         viewModel {
             InfoStarshipScreenViewModel(
-                getStarshipByIdUseCase = get()
+                getStarshipByIdUseCase = get(),
+                saveStarshipInFavoritesUseCase = get()
             )
         }
 
