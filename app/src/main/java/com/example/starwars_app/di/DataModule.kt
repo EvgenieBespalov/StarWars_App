@@ -1,5 +1,6 @@
 package com.example.starwars_app.di
 
+import com.example.starwars_app.data.converter.ConverterDatabase
 import com.example.starwars_app.data.converter.ConverterPeople
 import com.example.starwars_app.data.converter.ConverterPlanet
 import com.example.starwars_app.data.converter.ConverterStarship
@@ -11,4 +12,5 @@ fun provideDataModule(): Module =
         factory { ConverterPlanet() }
         factory { ConverterPeople() }
         factory { ConverterStarship() }
+        factory { ConverterDatabase() }
     }
