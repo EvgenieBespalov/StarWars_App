@@ -102,8 +102,12 @@ fun FavoriteBox(
                 shape = RoundedCornerShape(30.dp)
             )
             .clickable {
-                //navController.navigate(Routes.InfoPlanetScreenRoute.route + "/${favorite.id}")
-            },
+                when(favorite.type){
+                    "planet" -> navController.navigate(Routes.InfoPlanetScreenRoute.route + "/${favorite.id}")
+                    "people" -> navController.navigate(Routes.InfoPeopleScreenRoute.route + "/${favorite.id}")
+                    "starship" -> navController.navigate(Routes.InfoStarshipScreenRoute.route + "/${favorite.id}")
+                }
+                       },
         contentAlignment = Alignment.BottomCenter,
     ){
         AsyncImage(
