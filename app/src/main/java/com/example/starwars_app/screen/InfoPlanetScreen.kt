@@ -1,6 +1,5 @@
 package com.example.starwars_app.screen
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,17 +19,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.example.starwars_app.R
 import com.example.starwars_app.domain.entity.PlanetEntity
 import com.example.starwars_app.presentation.InfoPlanetScreenUiState
 import com.example.starwars_app.presentation.InfoPlanetScreenViewModel
-import com.example.starwars_app.presentation.SearchPlanetsScreenUiState
-import com.example.starwars_app.presentation.SearchPlanetsScreenViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -49,7 +45,7 @@ fun InfoPlanetScreen(
             )
     ){
         when(state){
-            InfoPlanetScreenUiState.Initial    -> planetId?.let { viewModel.getPlanetBy(it) }
+            InfoPlanetScreenUiState.Initial    -> planetId?.let { viewModel.getPlanetById(it) }
             InfoPlanetScreenUiState.Loading    -> ScreenLoadind()
             is InfoPlanetScreenUiState.Content -> {
                 InfoPlanetColumn(planet = (state as InfoPlanetScreenUiState.Content).planet)
@@ -60,7 +56,10 @@ fun InfoPlanetScreen(
 }
 
 @Composable
-fun InfoPlanetColumn(planet: PlanetEntity){
+fun InfoPlanetColumn(
+    viewModel: InfoPlanetScreenViewModel = koinViewModel(),
+    planet: PlanetEntity
+) {
     Column(
         modifier = Modifier.padding(10.dp),
         verticalArrangement = Arrangement.Center,
@@ -83,7 +82,9 @@ fun InfoPlanetColumn(planet: PlanetEntity){
                         containerColor = Color.Transparent,
                         contentColor = Color.Yellow,
                     ),
-                    onClick = { /*TODO*/ }
+                    onClick = {
+                        viewModel.savePlanet(planet)
+                    }
                 ) {
                     Icon(
                         modifier = Modifier

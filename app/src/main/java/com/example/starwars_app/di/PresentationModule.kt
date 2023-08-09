@@ -15,7 +15,8 @@ fun providePresentationModule(): Module =
         }
         viewModel {
             InfoPlanetScreenViewModel(
-                getPlanetByIdUseCase = get()
+                getPlanetByIdUseCase = get(),
+                savePlanetInFavoritesUseCase = get()
             )
         }
 
