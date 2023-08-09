@@ -27,6 +27,7 @@ private fun provideOkHttpClient(): OkHttpClient =
         .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
         .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
         .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+        .addInterceptor(ReceivedCookiesInterceptor())
         .build()
 
 private fun provideGson(): Gson =
@@ -44,6 +45,20 @@ private fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit =
 private fun providePlanetApi(retrofit: Retrofit): PlanetApi =
     retrofit.create()
 
+
+class ReceivedCookiesInterceptor() : Interceptor {
+    @Throws(IOException::class)
+    override fun intercept(chain: Interceptor.Chain): Response
+    {
+        val request = chain.request()
+        var response = chain.proceed(request)
+
+        Log.i(ControlsProviderService.TAG, "request: "+ request.toString())
+        Log.i(ControlsProviderService.TAG, "response: "+ response.toString())
+
+        return response
+    }
+}
 
 fun provideNetworkModule(): Module =
     module {

@@ -1,5 +1,7 @@
 package com.example.starwars_app.screen
 
+import android.service.controls.ControlsProviderService
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -9,10 +11,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,15 +27,22 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.starwars_app.R
+import com.example.starwars_app.presentation.SearchPlanetsScreenUiState
 import com.example.starwars_app.presentation.SearchPlanetsScreenViewModel
 import com.example.starwars_app.screen.navigation.Routes
 import org.koin.androidx.compose.koinViewModel
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.starwars_app.domain.entity.PlanetEntity
 
 @Composable
 fun SearchPlanetsScreen(
     navController: NavHostController,
     viewModel: SearchPlanetsScreenViewModel = koinViewModel()
 ){
+    val state by viewModel.state.observeAsState(SearchPlanetsScreenUiState.Initial)
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -49,7 +55,7 @@ fun SearchPlanetsScreen(
         Column(modifier = Modifier
             .fillMaxSize()
         ){
-            var userPasswordTextField by remember { mutableStateOf("") }
+            var namePlanets by remember { mutableStateOf("") }
 
             OutlinedTextField(
                 modifier = Modifier
@@ -57,9 +63,11 @@ fun SearchPlanetsScreen(
                     .height(55.dp)
                     .fillMaxWidth(),
                 leadingIcon = { Icon(Icons.Outlined.Search, contentDescription = null) },
-                value = userPasswordTextField,
+                value = namePlanets,
                 onValueChange = {
-                    userPasswordTextField = it
+                    namePlanets = it
+                    if (namePlanets.length > 0)
+                        viewModel.searchPlanets(namePlanets)
                 },
                 placeholder = {
                     Text(
@@ -82,29 +90,38 @@ fun SearchPlanetsScreen(
                 textStyle = TextStyle(fontSize = 20.sp)
             )
 
-            ListOfPlanetLazyVerticalGrid(navController)
+            when(state){
+                SearchPlanetsScreenUiState.Initial    -> Unit
+                SearchPlanetsScreenUiState.Loading    -> ScreenLoadind()
+                is SearchPlanetsScreenUiState.Content -> {
+                    ListOfPlanetLazyVerticalGrid(navController = navController, planets = (state as SearchPlanetsScreenUiState.Content).planets.collectAsLazyPagingItems())
+                }
+                is SearchPlanetsScreenUiState.Error   -> ScreenError(errorText = (state as SearchPlanetsScreenUiState.Error).message.orEmpty())
+            }
         }
     }
 }
 
 @Composable
 fun ListOfPlanetLazyVerticalGrid(
-    navController: NavHostController
+    navController: NavHostController,
+    planets: LazyPagingItems<PlanetEntity>
 ){
     LazyVerticalGrid(
         modifier = Modifier
             .fillMaxSize(),
         columns = GridCells.Fixed(2)
     ) {
-        items(100){
-            PlanetBox(navController)
+        items(count = planets.itemCount) { index ->
+            planets[index]?.let { PlanetBox(navController, it) }
         }
     }
 }
 
 @Composable
 fun PlanetBox(
-    navController: NavHostController
+    navController: NavHostController,
+    planet: PlanetEntity
 ){
     /*val image =
         rememberAsyncImagePainter(productItem.photo)*/
@@ -136,7 +153,7 @@ fun PlanetBox(
         Text(
             modifier = Modifier
                 .padding(5.dp),
-            text = "Name planet",
+            text = planet.name,
             color = Color.Yellow,
             fontSize = 20.sp
         )

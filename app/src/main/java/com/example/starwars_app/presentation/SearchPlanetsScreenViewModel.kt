@@ -1,5 +1,7 @@
 package com.example.starwars_app.presentation
 
+import android.service.controls.ControlsProviderService
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -28,7 +30,7 @@ class SearchPlanetsScreenViewModel (
 
             try {
                 val planets = searchPlanetsUseCase(name)
-                _state.value = planets?.let { SearchPlanetsScreenUiState.Content(it) }
+                _state.value = planets.let { SearchPlanetsScreenUiState.Content(it) }
             } catch (rethrow: CancellationException) {
                 throw rethrow
             } catch (ex: Exception) {
