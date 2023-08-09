@@ -1,6 +1,5 @@
 package com.example.starwars_app.screen
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,7 +16,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -25,7 +23,6 @@ import com.example.starwars_app.R
 import com.example.starwars_app.domain.entity.PeopleEntity
 import com.example.starwars_app.presentation.InfoPeopleScreenUiState
 import com.example.starwars_app.presentation.InfoPeopleScreenViewModel
-import com.example.starwars_app.screen.navigation.Routes
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -44,7 +41,7 @@ fun InfoPeopleScreen(
             )
     ){
         when(state){
-            InfoPeopleScreenUiState.Initial    -> peopleId?.let { viewModel.getPeopleBy(it) }
+            InfoPeopleScreenUiState.Initial    -> peopleId?.let { viewModel.getPeopleById(it) }
             InfoPeopleScreenUiState.Loading    -> ScreenLoadind()
             is InfoPeopleScreenUiState.Content -> {
                 InfoPeopleColumn(people = (state as InfoPeopleScreenUiState.Content).people)
@@ -55,7 +52,10 @@ fun InfoPeopleScreen(
 }
 
 @Composable
-fun InfoPeopleColumn(people: PeopleEntity){
+fun InfoPeopleColumn(
+    people: PeopleEntity,
+    viewModel: InfoPeopleScreenViewModel = koinViewModel(),
+){
     Column(
         modifier = Modifier.padding(10.dp),
         verticalArrangement = Arrangement.Center,
@@ -66,7 +66,6 @@ fun InfoPeopleColumn(people: PeopleEntity){
                 fontSize = 30.sp,
                 color = Color.Yellow
             )
-
             Box(
                 modifier = Modifier.fillMaxWidth(),
                 contentAlignment = Alignment.CenterEnd
@@ -78,7 +77,9 @@ fun InfoPeopleColumn(people: PeopleEntity){
                         containerColor = Color.Transparent,
                         contentColor = Color.Yellow,
                     ),
-                    onClick = { /*TODO*/ }
+                    onClick = {
+                        viewModel.savePeople(people)
+                    }
                 ) {
                     Icon(
                         modifier = Modifier
