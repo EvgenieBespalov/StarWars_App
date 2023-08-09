@@ -89,7 +89,7 @@ object ListOfBottomMenuItems {
         BottomMenuItem(
             label = "Favorites",
             icon = Icons.Outlined.Star,
-            route = Routes.FavouritesScreenRoute.route
+            route = Routes.ListOfFavoritesScreenRoute.route
         )
     )
 }

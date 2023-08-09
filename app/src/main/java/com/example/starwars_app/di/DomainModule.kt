@@ -76,4 +76,6 @@ fun provideDomainModule(): Module =
                 converter = get()
             )
         }
+        factory { SavePeopleInFavoritesUseCase(repository = get()) }
+        factory { GetAllFavoritesUseCase(repository = get()) }
     }

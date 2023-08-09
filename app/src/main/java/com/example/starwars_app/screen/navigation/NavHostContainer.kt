@@ -25,6 +25,10 @@ fun NavHostContainer(
                 ResourcesScreen(navController = navController)
             }
 
+            composable(Routes.ListOfFavoritesScreenRoute.route) {
+                ListOfFavoritesScreen(navController = navController)
+            }
+
             composable(Routes.SearchPlanetsScreenRoute.route) {
                 SearchPlanetsScreen(navController = navController)
             }

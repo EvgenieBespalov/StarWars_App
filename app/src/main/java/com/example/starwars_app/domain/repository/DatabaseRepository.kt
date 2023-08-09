@@ -6,11 +6,11 @@ import com.example.starwars_app.domain.entity.PlanetEntity
 import com.example.starwars_app.domain.entity.StarshipEntity
 
 interface DatabaseRepository {
-    fun savePlanet(planet: PlanetEntity)
+    suspend fun savePlanet(planet: PlanetEntity)
 
-    fun savePeople(people: PeopleEntity)
+    suspend fun savePeople(people: PeopleEntity)
 
-    fun saveStarship(starship: StarshipEntity)
+    suspend fun saveStarship(starship: StarshipEntity)
 
-    fun getAll(): List<DatabaseEntity>
+    suspend fun getAll(): List<DatabaseEntity>
 }
