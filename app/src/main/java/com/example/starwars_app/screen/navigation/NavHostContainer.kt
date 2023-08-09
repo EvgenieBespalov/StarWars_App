@@ -45,8 +45,8 @@ fun NavHostContainer(
                 InfoPeopleScreen(peopleId = it.arguments?.getString("peopleId"))
             }
 
-            composable(Routes.InfoStarShipScreenRoute.route) {
-                InfoStarShipScreen()
+            composable(Routes.InfoStarshipScreenRoute.route + "/{starshipId}") {
+                InfoStarshipScreen(starshipId = it.arguments?.getString("starshipId"))
             }
         }
     )

@@ -1,6 +1,5 @@
 package com.example.starwars_app.screen
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -135,7 +134,7 @@ fun StarshipBox(
                 shape = RoundedCornerShape(30.dp)
             )
             .clickable {
-                navController.navigate(Routes.InfoStarShipScreenRoute.route)
+                navController.navigate(Routes.InfoStarshipScreenRoute.route + "/${starship.id}")
             },
         contentAlignment = Alignment.BottomCenter,
     ){

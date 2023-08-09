@@ -7,6 +7,6 @@ sealed class Routes(val route: String) {
     object SearchStarShipsScreenRoute : Routes("SearchStarShip")
     object InfoPlanetScreenRoute : Routes("InfoPlanet")
     object InfoPeopleScreenRoute : Routes("InfoCharacter")
-    object InfoStarShipScreenRoute : Routes("InfoStarShip")
+    object InfoStarshipScreenRoute : Routes("InfoStarShip")
     object FavouritesScreenRoute : Routes("Favourites")
 }

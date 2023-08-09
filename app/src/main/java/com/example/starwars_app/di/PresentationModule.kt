@@ -24,7 +24,6 @@ fun providePresentationModule(): Module =
                 searchPeoplesUseCase = get()
             )
         }
-
         viewModel {
             InfoPeopleScreenViewModel(
                 getPeopleByIdUseCase = get()
@@ -34,6 +33,11 @@ fun providePresentationModule(): Module =
         viewModel {
             SearchStarshipsScreenViewModel(
                 searchStarshipsUseCase = get()
+            )
+        }
+        viewModel {
+            InfoStarshipScreenViewModel(
+                getStarshipByIdUseCase = get()
             )
         }
     }

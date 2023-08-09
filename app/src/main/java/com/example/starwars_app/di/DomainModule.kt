@@ -59,5 +59,5 @@ fun provideDomainModule(): Module =
             )
         }
         factory { SearchStarshipsUseCase(repository = get()) }
-        //factory { GetPeopleByIdUseCase(repository = get()) }
+        factory { GetStarshipByIdUseCase(repository = get()) }
     }
