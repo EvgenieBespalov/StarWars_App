@@ -9,7 +9,7 @@ import org.koin.dsl.module
 fun provideDataBaseModule(): Module =
     module{
         single {
-            Room.databaseBuilder(androidApplication(), Database::class.java, "bin_db")
+            Room.databaseBuilder(androidApplication(), Database::class.java, "star_wars_db")
                 .fallbackToDestructiveMigration()
                 .build()
 

@@ -8,6 +8,6 @@ interface DatabaseDAO {
     @Insert
     fun save(entities: DatabaseModel)
 
-    @Query("SELECT * FROM database")
+    @Query("SELECT * FROM star_wars_table")
     fun getAll(): List<DatabaseModel>
 }
