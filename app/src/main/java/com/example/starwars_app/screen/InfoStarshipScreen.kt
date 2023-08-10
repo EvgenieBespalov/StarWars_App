@@ -1,11 +1,8 @@
 package com.example.starwars_app.screen
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.*
@@ -72,12 +69,17 @@ fun StarshipInfoColumn(
     ){
         Row(){
             Text(
+                modifier = Modifier
+                    .weight(8f)
+                    .fillMaxWidth(),
                 text = starship.name,
                 fontSize = 30.sp,
                 color = Color.Yellow
             )
             Box(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .size(40.dp)
+                    .weight(1f),
                 contentAlignment = Alignment.CenterEnd
             ) {
                 IconButton(

@@ -63,12 +63,17 @@ fun InfoPeopleColumn(
     ){
         Row(){
             Text(
+                modifier = Modifier
+                    .weight(8f)
+                    .fillMaxWidth(),
                 text = people.name,
                 fontSize = 30.sp,
                 color = Color.Yellow
             )
             Box(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .size(40.dp)
+                    .weight(1f),
                 contentAlignment = Alignment.CenterEnd
             ) {
                 IconButton(
