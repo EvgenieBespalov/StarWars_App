@@ -50,7 +50,7 @@ fun InfoStarshipScreen(
             InfoStarshipScreenUiState.Initial    -> starshipId?.let { viewModel.getStarshipBy(it) }
             InfoStarshipScreenUiState.Loading    -> ScreenLoadind()
             is InfoStarshipScreenUiState.Content -> {
-                StarshipInfoColumn(starship = (state as InfoStarshipScreenUiState.Content).starship)
+                StarshipInfoColumn(starship = (state as InfoStarshipScreenUiState.Content).starship, checkSave = (state as InfoStarshipScreenUiState.Content).checkFavorites)
             }
             is InfoStarshipScreenUiState.Error   -> ScreenError(errorText = (state as InfoStarshipScreenUiState.Error).message.orEmpty())
         }
@@ -61,6 +61,7 @@ fun InfoStarshipScreen(
 @Composable
 fun StarshipInfoColumn(
     viewModel: InfoStarshipScreenViewModel = koinViewModel(),
+    checkSave: Boolean,
     starship: StarshipEntity
 ){
     Column(
@@ -75,7 +76,6 @@ fun StarshipInfoColumn(
                 fontSize = 30.sp,
                 color = Color.Yellow
             )
-
             Box(
                 modifier = Modifier.fillMaxWidth(),
                 contentAlignment = Alignment.CenterEnd
@@ -85,8 +85,10 @@ fun StarshipInfoColumn(
                         .size(40.dp),
                     colors = IconButtonDefaults.iconButtonColors(
                         containerColor = Color.Transparent,
-                        contentColor = Color.Yellow,
+                        contentColor = Color.LightGray,
+                        disabledContentColor = Color.Yellow
                     ),
+                    enabled = checkSave.not(),
                     onClick = {
                         viewModel.saveStarship(starship)
                     }
