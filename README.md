@@ -51,7 +51,7 @@
 
 <p align="center">
   <br>
-  <img src="https://github.com/EvgenieBespalov/StarWars_App/assets/95974491/6551414b-b971-44e6-b945-02fe64b885b5">
+  <img src="https://github.com/EvgenieBespalov/StarWars_App/assets/95974491/8678790a-3c00-47a0-9fbd-c77948c62d30" style="height:500px">
   <br>Вкладка избранного
 </p>
 На данной странице выводятся все объекты, добавленные пользователем в избранное. 
