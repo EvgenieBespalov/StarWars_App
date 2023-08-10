@@ -11,7 +11,7 @@ import com.example.starwars_app.domain.repository.StarshipRepository
 import kotlinx.coroutines.flow.Flow
 
 class StarshipRepositoryImpl (
-    private val starshipApi: StarshipApi,
+    private val starshipApi: com.example.starwars_app.data.api.StarshipApi,
     private val converter: ConverterStarship
 ) : StarshipRepository {
 

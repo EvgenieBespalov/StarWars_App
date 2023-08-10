@@ -13,7 +13,7 @@ import kotlinx.coroutines.withContext
 
 class DatabaseRepositoryImpl(
     private val databaseDAO: DatabaseDAO,
-    private val converter: ConverterDatabase
+    private val converter: com.example.starwars_app.data.converter.ConverterDatabase
 ) : DatabaseRepository {
 
     override suspend fun savePlanet(planet: PlanetEntity) {

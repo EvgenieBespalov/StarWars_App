@@ -13,7 +13,7 @@ import retrofit2.HttpException
 import java.io.IOException
 
 class PlanetPagingSource(
-    private val planetApi: PlanetApi,
+    private val planetApi: com.example.starwars_app.data.api.PlanetApi,
     private val converter: ConverterPlanet,
     private val name: String
     ): PagingSource<Int, PlanetEntity>() {

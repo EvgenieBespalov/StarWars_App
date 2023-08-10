@@ -22,23 +22,23 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 
 private fun providePlanetRepositoryImpl(
-    planetApi: PlanetApi,
+    planetApi: com.example.starwars_app.data.api.PlanetApi,
     converter: ConverterPlanet
 ): PlanetRepository = PlanetRepositoryImpl(planetApi, converter)
 
 private fun providePeopleRepositoryImpl(
-    peopleApi: PeopleApi,
-    converter: ConverterPeople
+    peopleApi: com.example.starwars_app.data.api.PeopleApi,
+    converter: com.example.starwars_app.data.converter.ConverterPeople
 ): PeopleRepository = PeopleRepositoryImpl(peopleApi, converter)
 
 private fun provideStarshipRepositoryImpl(
-    starshipApi: StarshipApi,
+    starshipApi: com.example.starwars_app.data.api.StarshipApi,
     converter: ConverterStarship
 ): StarshipRepository = StarshipRepositoryImpl(starshipApi, converter)
 
 private fun provideDatabaseRepositoryImpl(
     databaseDAO: DatabaseDAO,
-    converter: ConverterDatabase
+    converter: com.example.starwars_app.data.converter.ConverterDatabase
 ): DatabaseRepository = DatabaseRepositoryImpl(databaseDAO, converter)
 
 fun provideDomainModule(): Module =

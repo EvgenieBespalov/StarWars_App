@@ -11,8 +11,8 @@ import com.example.starwars_app.domain.repository.PeopleRepository
 import kotlinx.coroutines.flow.Flow
 
 class PeopleRepositoryImpl(
-    private val peopleApi: PeopleApi,
-    private val converter: ConverterPeople
+    private val peopleApi: com.example.starwars_app.data.api.PeopleApi,
+    private val converter: com.example.starwars_app.data.converter.ConverterPeople
 ) : PeopleRepository {
 
     override suspend fun searchPeople(name: String): Flow<PagingData<PeopleEntity>> =

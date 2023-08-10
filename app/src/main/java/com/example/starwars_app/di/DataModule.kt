@@ -10,7 +10,7 @@ import org.koin.dsl.module
 fun provideDataModule(): Module =
     module {
         factory { ConverterPlanet() }
-        factory { ConverterPeople() }
+        factory { com.example.starwars_app.data.converter.ConverterPeople() }
         factory { ConverterStarship() }
-        factory { ConverterDatabase() }
+        factory { com.example.starwars_app.data.converter.ConverterDatabase() }
     }

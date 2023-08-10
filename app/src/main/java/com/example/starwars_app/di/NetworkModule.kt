@@ -44,13 +44,13 @@ private fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit =
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
 
-private fun providePlanetApi(retrofit: Retrofit): PlanetApi =
+private fun providePlanetApi(retrofit: Retrofit): com.example.starwars_app.data.api.PlanetApi =
     retrofit.create()
 
-private fun providePeopleApi(retrofit: Retrofit): PeopleApi =
+private fun providePeopleApi(retrofit: Retrofit): com.example.starwars_app.data.api.PeopleApi =
     retrofit.create()
 
-private fun provideStarshipApi(retrofit: Retrofit): StarshipApi =
+private fun provideStarshipApi(retrofit: Retrofit): com.example.starwars_app.data.api.StarshipApi =
     retrofit.create()
 
 class ReceivedCookiesInterceptor() : Interceptor {
