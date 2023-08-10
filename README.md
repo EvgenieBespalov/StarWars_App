@@ -19,7 +19,7 @@
 * MVVM - шаблон проектирования
 * Clean architecture
 * Многомодульность
-* Pager3 - для реализации пагинации
+* Paging3 - для реализации пагинации
 ## Описание функционала
 <p align="center">
   <img src="https://github.com/EvgenieBespalov/StarWars_App/assets/95974491/654fde5f-bc4e-4217-9d1f-6b10b7b8b422" style="height:500px">
