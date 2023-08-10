@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.starwars_app.domain.entity.PeopleEntity
+import com.example.starwars_app.domain.usecase.CheckPeopleInFavoritesUseCase
 import com.example.starwars_app.domain.usecase.GetPeopleByIdUseCase
 import com.example.starwars_app.domain.usecase.SavePeopleInFavoritesUseCase
 import kotlinx.coroutines.CancellationException
@@ -12,7 +13,8 @@ import kotlinx.coroutines.launch
 
 class InfoPeopleScreenViewModel (
     private val getPeopleByIdUseCase: GetPeopleByIdUseCase,
-    private val savePeopleInFavoritesUseCase: SavePeopleInFavoritesUseCase
+    private val savePeopleInFavoritesUseCase: SavePeopleInFavoritesUseCase,
+    private val checkPeopleInFavoritesUseCase: CheckPeopleInFavoritesUseCase
 ) : ViewModel() {
 
     private val _state: MutableLiveData<InfoPeopleScreenUiState> =
@@ -31,7 +33,8 @@ class InfoPeopleScreenViewModel (
 
             try {
                 val people = getPeopleByIdUseCase(id)
-                _state.value = people.let { InfoPeopleScreenUiState.Content(it) }
+                val checkPeople = checkPeopleInFavoritesUseCase(people)
+                _state.value = InfoPeopleScreenUiState.Content(people, checkPeople)
             } catch (rethrow: CancellationException) {
                 throw rethrow
             } catch (ex: Exception) {
@@ -45,6 +48,7 @@ class InfoPeopleScreenViewModel (
         viewModelScope.launch {
             try {
                 savePeopleInFavoritesUseCase(people)
+                _state.value = InfoPeopleScreenUiState.Initial
             } catch (rethrow: CancellationException) {
                 throw rethrow
             } catch (ex: Exception) {

@@ -12,4 +12,7 @@ interface DatabaseDAO {
 
     @Query("SELECT * FROM star_wars_table")
     fun getAll(): List<DatabaseModel>
+
+    @Query("SELECT * FROM star_wars_table WHERE id = :id AND type = :type LIMIT 1")
+    fun checkSave(id: String, type: String): DatabaseModel
 }

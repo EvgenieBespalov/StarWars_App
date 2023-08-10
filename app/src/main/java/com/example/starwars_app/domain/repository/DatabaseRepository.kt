@@ -13,4 +13,8 @@ interface DatabaseRepository {
     suspend fun saveStarship(starship: StarshipEntity)
 
     suspend fun getAll(): List<DatabaseEntity>
+
+    suspend fun checkSavePlanet(planet: PlanetEntity): Boolean
+    suspend fun checkSavePeople(people: PeopleEntity): Boolean
+    suspend fun checkSaveStarship(starship: StarshipEntity): Boolean
 }

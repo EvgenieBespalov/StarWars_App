@@ -39,4 +39,37 @@ class DatabaseRepositoryImpl(
              databaseDAO.getAll().map { converter.converModelInEntity(it) }
         }
     }
+
+    override suspend fun checkSavePlanet(planet: PlanetEntity): Boolean {
+        return withContext(Dispatchers.IO) {
+            val planetModel = converter.convertPlanetEntityInDatabase(planet)
+
+            when(databaseDAO.checkSave(planetModel.id, planetModel.type)){
+                null -> false
+                else -> true
+            }
+        }
+    }
+
+    override suspend fun checkSavePeople(people: PeopleEntity): Boolean {
+        return withContext(Dispatchers.IO) {
+            val peopleModel = converter.convertPeopleEntityInDatabase(people)
+
+            when(databaseDAO.checkSave(peopleModel.id, peopleModel.type)){
+                null -> false
+                else -> true
+            }
+        }
+    }
+
+    override suspend fun checkSaveStarship(starship: StarshipEntity): Boolean {
+        return withContext(Dispatchers.IO) {
+            val starshipModel = converter.convertStarshipEntityInDatabase(starship)
+
+            when(databaseDAO.checkSave(starshipModel.id, starshipModel.type)){
+                null -> false
+                else -> true
+            }
+        }
+    }
 }

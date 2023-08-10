@@ -44,7 +44,7 @@ fun InfoPeopleScreen(
             InfoPeopleScreenUiState.Initial    -> peopleId?.let { viewModel.getPeopleById(it) }
             InfoPeopleScreenUiState.Loading    -> ScreenLoadind()
             is InfoPeopleScreenUiState.Content -> {
-                InfoPeopleColumn(people = (state as InfoPeopleScreenUiState.Content).people)
+                InfoPeopleColumn(people = (state as InfoPeopleScreenUiState.Content).people, checkSave = (state as InfoPeopleScreenUiState.Content).checkFavorites)
             }
             is InfoPeopleScreenUiState.Error   -> ScreenError(errorText = (state as InfoPeopleScreenUiState.Error).message.orEmpty())
         }
@@ -54,6 +54,7 @@ fun InfoPeopleScreen(
 @Composable
 fun InfoPeopleColumn(
     people: PeopleEntity,
+    checkSave: Boolean,
     viewModel: InfoPeopleScreenViewModel = koinViewModel(),
 ){
     Column(
@@ -75,8 +76,10 @@ fun InfoPeopleColumn(
                         .size(40.dp),
                     colors = IconButtonDefaults.iconButtonColors(
                         containerColor = Color.Transparent,
-                        contentColor = Color.Yellow,
+                        contentColor = Color.LightGray,
+                        disabledContentColor = Color.Yellow
                     ),
+                    enabled = checkSave.not(),
                     onClick = {
                         viewModel.savePeople(people)
                     }

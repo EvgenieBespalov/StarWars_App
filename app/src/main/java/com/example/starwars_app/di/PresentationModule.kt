@@ -28,7 +28,8 @@ fun providePresentationModule(): Module =
         viewModel {
             InfoPeopleScreenViewModel(
                 getPeopleByIdUseCase = get(),
-                savePeopleInFavoritesUseCase = get()
+                savePeopleInFavoritesUseCase = get(),
+                checkPeopleInFavoritesUseCase = get()
             )
         }
 
