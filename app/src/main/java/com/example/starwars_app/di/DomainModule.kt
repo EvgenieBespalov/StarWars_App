@@ -81,4 +81,5 @@ fun provideDomainModule(): Module =
         factory { SaveStarshipInFavoritesUseCase(repository = get()) }
         factory { GetAllFavoritesUseCase(repository = get()) }
         factory { CheckPeopleInFavoritesUseCase(repository = get()) }
+        factory { CheckPlanetInFavoritesUseCase(repository = get()) }
     }

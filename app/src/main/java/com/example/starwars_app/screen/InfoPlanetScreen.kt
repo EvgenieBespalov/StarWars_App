@@ -48,7 +48,7 @@ fun InfoPlanetScreen(
             InfoPlanetScreenUiState.Initial    -> planetId?.let { viewModel.getPlanetById(it) }
             InfoPlanetScreenUiState.Loading    -> ScreenLoadind()
             is InfoPlanetScreenUiState.Content -> {
-                InfoPlanetColumn(planet = (state as InfoPlanetScreenUiState.Content).planet)
+                InfoPlanetColumn(planet = (state as InfoPlanetScreenUiState.Content).planet, checkSave = (state as InfoPlanetScreenUiState.Content).checkFavorites)
             }
             is InfoPlanetScreenUiState.Error   -> ScreenError(errorText = (state as InfoPlanetScreenUiState.Error).message.orEmpty())
         }
@@ -58,6 +58,7 @@ fun InfoPlanetScreen(
 @Composable
 fun InfoPlanetColumn(
     viewModel: InfoPlanetScreenViewModel = koinViewModel(),
+    checkSave: Boolean,
     planet: PlanetEntity
 ) {
     Column(
@@ -70,7 +71,6 @@ fun InfoPlanetColumn(
                 fontSize = 30.sp,
                 color = Color.Yellow
             )
-
             Box(
                 modifier = Modifier.fillMaxWidth(),
                 contentAlignment = Alignment.CenterEnd
@@ -80,8 +80,10 @@ fun InfoPlanetColumn(
                         .size(40.dp),
                     colors = IconButtonDefaults.iconButtonColors(
                         containerColor = Color.Transparent,
-                        contentColor = Color.Yellow,
+                        contentColor = Color.LightGray,
+                        disabledContentColor = Color.Yellow
                     ),
+                    enabled = checkSave.not(),
                     onClick = {
                         viewModel.savePlanet(planet)
                     }

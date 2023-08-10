@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.starwars_app.domain.entity.PeopleEntity
 import com.example.starwars_app.domain.entity.PlanetEntity
+import com.example.starwars_app.domain.usecase.CheckPlanetInFavoritesUseCase
 import com.example.starwars_app.domain.usecase.GetPlanetByIdUseCase
 import com.example.starwars_app.domain.usecase.SavePlanetInFavoritesUseCase
 import kotlinx.coroutines.CancellationException
@@ -13,7 +14,8 @@ import kotlinx.coroutines.launch
 
 class InfoPlanetScreenViewModel (
     private val getPlanetByIdUseCase: GetPlanetByIdUseCase,
-    private val savePlanetInFavoritesUseCase: SavePlanetInFavoritesUseCase
+    private val savePlanetInFavoritesUseCase: SavePlanetInFavoritesUseCase,
+    private val checkPlanetInFavoritesUseCase: CheckPlanetInFavoritesUseCase
 ) : ViewModel() {
 
     private val _state: MutableLiveData<InfoPlanetScreenUiState> =
@@ -32,7 +34,8 @@ class InfoPlanetScreenViewModel (
 
             try {
                 val planet = getPlanetByIdUseCase(id)
-                _state.value = planet.let { InfoPlanetScreenUiState.Content(it) }
+                val checkFavorites = checkPlanetInFavoritesUseCase(planet)
+                _state.value = InfoPlanetScreenUiState.Content(planet, checkFavorites)
             } catch (rethrow: CancellationException) {
                 throw rethrow
             } catch (ex: Exception) {
@@ -46,6 +49,7 @@ class InfoPlanetScreenViewModel (
         viewModelScope.launch {
             try {
                 savePlanetInFavoritesUseCase(planet)
+                _state.value = InfoPlanetScreenUiState.Initial
             } catch (rethrow: CancellationException) {
                 throw rethrow
             } catch (ex: Exception) {

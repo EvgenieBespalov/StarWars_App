@@ -33,8 +33,8 @@ class InfoPeopleScreenViewModel (
 
             try {
                 val people = getPeopleByIdUseCase(id)
-                val checkPeople = checkPeopleInFavoritesUseCase(people)
-                _state.value = InfoPeopleScreenUiState.Content(people, checkPeople)
+                val checkFavorites = checkPeopleInFavoritesUseCase(people)
+                _state.value = InfoPeopleScreenUiState.Content(people, checkFavorites)
             } catch (rethrow: CancellationException) {
                 throw rethrow
             } catch (ex: Exception) {
