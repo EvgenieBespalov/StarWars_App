@@ -1,5 +1,6 @@
 package com.example.starwars_app.di
 
+
 import com.example.starwars_app.data.api.PeopleApi
 import com.example.starwars_app.data.api.PlanetApi
 import com.example.starwars_app.data.api.StarshipApi
@@ -9,7 +10,6 @@ import com.example.starwars_app.data.converter.ConverterPlanet
 import com.example.starwars_app.data.converter.ConverterStarship
 import com.example.starwars_app.data.dao.DatabaseDAO
 import com.example.starwars_app.data.repository.PeopleRepositoryImpl
-import com.example.starwars_app.data.paging_source.PlanetPagingSource
 import com.example.starwars_app.data.repository.DatabaseRepositoryImpl
 import com.example.starwars_app.data.repository.PlanetRepositoryImpl
 import com.example.starwars_app.data.repository.StarshipRepositoryImpl
@@ -22,23 +22,23 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 
 private fun providePlanetRepositoryImpl(
-    planetApi: com.example.starwars_app.data.api.PlanetApi,
+    planetApi: PlanetApi,
     converter: ConverterPlanet
 ): PlanetRepository = PlanetRepositoryImpl(planetApi, converter)
 
 private fun providePeopleRepositoryImpl(
-    peopleApi: com.example.starwars_app.data.api.PeopleApi,
-    converter: com.example.starwars_app.data.converter.ConverterPeople
+    peopleApi: PeopleApi,
+    converter: ConverterPeople
 ): PeopleRepository = PeopleRepositoryImpl(peopleApi, converter)
 
 private fun provideStarshipRepositoryImpl(
-    starshipApi: com.example.starwars_app.data.api.StarshipApi,
+    starshipApi: StarshipApi,
     converter: ConverterStarship
 ): StarshipRepository = StarshipRepositoryImpl(starshipApi, converter)
 
 private fun provideDatabaseRepositoryImpl(
     databaseDAO: DatabaseDAO,
-    converter: com.example.starwars_app.data.converter.ConverterDatabase
+    converter: ConverterDatabase
 ): DatabaseRepository = DatabaseRepositoryImpl(databaseDAO, converter)
 
 fun provideDomainModule(): Module =

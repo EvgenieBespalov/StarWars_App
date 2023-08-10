@@ -11,6 +11,11 @@ class ConverterPeople {
             name = from.name,
             gender = from.gender,
             countOfStarhips = from.starships.size.toString(),
-            image = "https://starwars-visualguide.com/assets/img/characters/${from.url.replace("[^0-9]".toRegex(), "")}.jpg"
+            image = "https://starwars-visualguide.com/assets/img/characters/${
+                from.url.replace(
+                    "[^0-9]".toRegex(),
+                    ""
+                )
+            }.jpg"
         )
 }

@@ -10,8 +10,8 @@ import com.example.starwars_app.domain.entity.PeopleEntity
 import retrofit2.HttpException
 
 class PeoplePagingSource(
-    private val peopleApi: com.example.starwars_app.data.api.PeopleApi,
-    private val converter: com.example.starwars_app.data.converter.ConverterPeople,
+    private val peopleApi: PeopleApi,
+    private val converter: ConverterPeople,
     private val name: String
 ): PagingSource<Int, PeopleEntity>() {
 

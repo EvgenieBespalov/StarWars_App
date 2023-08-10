@@ -11,7 +11,7 @@ import com.example.starwars_app.domain.repository.PlanetRepository
 import kotlinx.coroutines.flow.Flow
 
 class PlanetRepositoryImpl(
-    private val planetApi: com.example.starwars_app.data.api.PlanetApi,
+    private val planetApi: PlanetApi,
     private val converter: ConverterPlanet
 ) : PlanetRepository {
 

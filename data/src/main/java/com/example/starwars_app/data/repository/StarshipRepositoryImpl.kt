@@ -5,13 +5,13 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.starwars_app.data.api.StarshipApi
 import com.example.starwars_app.data.converter.ConverterStarship
-import com.example.starwars_app.domain.entity.StarshipEntity
 import com.example.starwars_app.data.paging_source.StarshipPagingSource
+import com.example.starwars_app.domain.entity.StarshipEntity
 import com.example.starwars_app.domain.repository.StarshipRepository
 import kotlinx.coroutines.flow.Flow
 
 class StarshipRepositoryImpl (
-    private val starshipApi: com.example.starwars_app.data.api.StarshipApi,
+    private val starshipApi: StarshipApi,
     private val converter: ConverterStarship
 ) : StarshipRepository {
 

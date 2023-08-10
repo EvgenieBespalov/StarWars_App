@@ -10,7 +10,7 @@ import com.example.starwars_app.domain.entity.StarshipEntity
 import retrofit2.HttpException
 
 class StarshipPagingSource (
-    private val starshipApi: com.example.starwars_app.data.api.StarshipApi,
+    private val starshipApi: StarshipApi,
     private val converter: ConverterStarship,
     private val name: String
 ): PagingSource<Int, StarshipEntity>() {

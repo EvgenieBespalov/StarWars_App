@@ -6,14 +6,11 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.starwars_app.data.api.PlanetApi
 import com.example.starwars_app.data.converter.ConverterPlanet
-import com.example.starwars_app.data.model.PlanetApiModel
-import com.example.starwars_app.data.repository.PlanetRepositoryImpl
 import com.example.starwars_app.domain.entity.PlanetEntity
 import retrofit2.HttpException
-import java.io.IOException
 
 class PlanetPagingSource(
-    private val planetApi: com.example.starwars_app.data.api.PlanetApi,
+    private val planetApi: PlanetApi,
     private val converter: ConverterPlanet,
     private val name: String
     ): PagingSource<Int, PlanetEntity>() {

@@ -12,6 +12,11 @@ class ConverterStarship {
             model = from.model,
             manufacturer = from.manufacturer,
             passengers = from.passengers,
-            image = "https://starwars-visualguide.com/assets/img/starships/${from.url.replace("[^0-9]".toRegex(), "")}.jpg"
+            image = "https://starwars-visualguide.com/assets/img/starships/${
+                from.url.replace(
+                    "[^0-9]".toRegex(),
+                    ""
+                )
+            }.jpg"
         )
 }
