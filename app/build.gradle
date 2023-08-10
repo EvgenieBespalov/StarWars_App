@@ -44,6 +44,7 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+
 }
 
 apply plugin: 'kotlin-kapt'
@@ -92,4 +93,9 @@ dependencies {
     //Pager3
     implementation "androidx.paging:paging-runtime:3.2.0"
     implementation "androidx.paging:paging-compose:3.2.0"
+
+    //Тесты
+    testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
+    testImplementation "org.mockito:mockito-core:4.0.0"
+    testImplementation "org.mockito.kotlin:mockito-kotlin:4.0.0"
 }
